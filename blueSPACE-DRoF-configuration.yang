@@ -13,7 +13,7 @@ module blueSPACE-DRoF-configuration {
     description
     "Latest update to blueSPACE-DRoF-configuration YANG data model.";
 
-    revision "2018-03-21" {
+    revision "2019-03-21" {
     description "Update to blueSPACE-DRoF-configuration YANG data model initial revision.";
     reference "";
     }
