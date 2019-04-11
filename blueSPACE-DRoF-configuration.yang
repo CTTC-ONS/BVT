@@ -1,0 +1,119 @@
+module blueSPACE-DRoF-configuration {
+
+    namespace "urn:blueSPACE-DRoF-configuration";
+
+    prefix "blueSPACE-DRoF-configuration";
+
+    organization
+    "CTTC";
+
+    contact
+    "laura.rodriguez@cttc.cat";
+
+    description
+    "Latest update to blueSPACE-DRoF-configuration YANG data model.";
+
+    revision "2018-03-21" {
+    description "Update to blueSPACE-DRoF-configuration YANG data model initial revision.";
+    reference "";
+    }
+
+    identity status {
+        description "status";
+    }
+
+    identity active {
+        base status;
+    }
+
+    identity off {
+        base status;
+    }
+
+    identity standby {
+        base status;
+    }
+
+    identity FEC {
+        description "FEC base";
+    }
+
+    identity HD-FEC {
+        base FEC;
+    }
+
+    identity SD-FEC {
+        base FEC;
+    }
+
+    grouping monitor {
+        leaf subcarrier-id {
+            type string;
+        }
+        leaf SNR {
+            type string;
+        }
+    }
+
+    grouping constellation {
+        leaf subcarrier-id {
+            type string;
+        }
+        leaf bitsxsymbol {
+            type string;
+        }
+        leaf powerxsymbol {
+            type string;
+        }
+    }
+
+    grouping DRoF-configuration {
+        leaf status {
+            type identityref {
+                base status;
+            }
+        }
+        leaf nominal-central-frequency {
+            type string;
+        }
+        list constellation {
+            key "subcarrier-id";
+            uses constellation;
+        }
+        leaf FEC {
+            type identityref {
+                base FEC;
+            }
+        }
+        leaf equalization {
+            type string;
+        }
+        list monitor {
+            config false;
+            key "subcarrier-id";
+            uses monitor;
+        }
+        leaf BER {
+            config false;
+            type string;
+        }
+    }
+
+    container DRoF-configuration {
+        uses DRoF-configuration;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
