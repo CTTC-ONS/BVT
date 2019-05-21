@@ -1,0 +1,197 @@
+module blueSPACE-DRoF-TP-capability {
+
+    namespace "urn:blueSPACE-DRoF-TP-capability";
+
+    prefix "blueSPACE-DRoF-TP-capability";
+
+    organization
+    "CTTC";
+
+    contact
+    "laura.rodriguez@cttc.es";
+
+    description
+    "Latest update to blueSPACE-DRoF-TP-capability YANG data model.";
+
+    revision "2018-12-21" {
+    description "Update to blueSPACE-DRoF-TP-capability YANG data model initial revision.";
+    reference "";
+    }
+
+    identity supportable-constellation {
+        description "supportable-constellation base";
+    }
+
+    identity "qam256" {
+        base supportable-constellation;
+    }
+
+    identity "qam128" {
+        base supportable-constellation;
+    }
+
+    identity "qam64" {
+        base supportable-constellation;
+    }
+
+    identity "qam32" {
+        base supportable-constellation;
+    }
+
+    identity "qam16" {
+        base supportable-constellation;
+    }
+
+    identity "qam8" {
+        base supportable-constellation;
+    }
+
+    identity "qam4" {
+        base supportable-constellation;
+    }
+
+    identity "bpsk" {
+        base supportable-constellation;
+    }
+
+    identity supportable-FEC {
+        description "supportable-FEC base";
+    }
+
+    identity HD-FEC {
+        base supportable-FEC;
+    }
+
+    identity SD-FEC {
+        base supportable-FEC;
+    }
+
+    identity supportable-equalization {
+        description "supportable-equalization";
+    }
+
+    identity ZF {
+        base supportable-equalization;
+    }
+
+    identity MMSE {
+        base supportable-equalization;
+    }
+
+    grouping supportable-equalization {
+        leaf equalization-id {
+            type string;
+        }
+        leaf equalization-type {
+            type identityref {
+                base supportable-equalization;
+            }
+        }
+    }
+
+    grouping supportable-FEC {
+        leaf fec-id {
+            type string;
+        }
+        leaf fec-type {
+            type identityref {
+                base supportable-FEC;
+            }
+        }
+    }
+
+    grouping supportable-nominal-central-frequency-range {
+        leaf adjustment-granularity {
+            type string;
+            description "e.g 6.25GHz";
+        }
+        leaf grid-type {
+            type string;
+            description "e.g Flex";
+        }
+        leaf lower-frequency {
+            type string;
+            description "e.g 191.494THz";
+        }
+        leaf upper-frequency {
+            type string;
+            description "e.g 195,256THz";
+        }
+    }
+
+    grouping supportable-constellation {
+        leaf constellation-id {
+            type string;
+        }
+        leaf mod-type {
+            type identityref {
+                base supportable-constellation;
+            }
+        }
+    }
+
+    grouping supportable-capacity {
+        leaf max-capacity {
+            type uint32;
+            description "e.g 50";
+        }
+        leaf min-capacity {
+            type uint32;
+            description "e.g 5";
+        }
+    }
+
+    grouping DRoF-TP-capability {
+        container supportable-capacity {
+            uses supportable-capacity;
+        }
+        leaf supportable-modulation {
+            type string;
+            description "e.g. OFDM";
+        }
+        leaf-list supportable-subcarriers {
+            type uint32;
+            max-elements 512;
+        }
+        list supportable-constellation {
+            key "constellation-id";
+            uses supportable-constellation;
+        }
+        container supportable-nominal-central-frequency-range {
+            uses supportable-nominal-central-frequency-range;
+        }
+        leaf supportable-bandwidth {
+            type string;
+            description "e.g. 25GHz";
+        }
+        list supportable-FEC {
+            key "fec-id";
+            uses supportable-FEC;
+        }
+        list supportable-equalization {
+            key "equalization-id";
+            uses supportable-equalization;
+        }
+    }
+
+    container DRoF-TP-capability {
+        config false;
+        uses DRoF-TP-capability;
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
